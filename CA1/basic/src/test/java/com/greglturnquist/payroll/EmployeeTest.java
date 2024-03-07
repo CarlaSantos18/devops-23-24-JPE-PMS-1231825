@@ -130,5 +130,17 @@ class EmployeeTest {
         //Act & Assert
         assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
+
+    @Test
+    void createEmployee_ThrowsExceptionInvalidEmail() {
+        //Arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 2;
+        String email = "frodobagginsshire.com";
+        //Act & Assert
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
+    }
   
 }
