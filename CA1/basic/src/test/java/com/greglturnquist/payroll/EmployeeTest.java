@@ -6,19 +6,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeTest {
 
     @Test
-    void createEmployee() {
+    void createEmployee() throws InstantiationException {
         //Arrange
         String firstName = "Frodo";
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 2;
+        String email = "frogobaggins@shire.com";
         //Act
-        Employee employee = new Employee(firstName, lastName, description, jobYears);
+        Employee employee = new Employee(firstName, lastName, description, jobYears,email);
         //Assert
         assertEquals("Frodo", employee.getFirstName());
         assertEquals("Baggins", employee.getLastName());
         assertEquals("ring bearer", employee.getDescription());
         assertEquals(2, employee.getJobYears());
+        assertEquals(email, employee.getEmail());
     }
 
     @Test
@@ -28,8 +30,9 @@ class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 2;
+        String email = "frodobaggins@shire.com";
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee(firstName, lastName, description, jobYears));
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
 
     @Test
@@ -39,8 +42,9 @@ class EmployeeTest {
         String lastName = null;
         String description = "ring bearer";
         int jobYears = 2;
+        String email = "frodobaggins@shire.com";
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee(firstName, lastName, description, jobYears));
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
 
     @Test
@@ -50,8 +54,9 @@ class EmployeeTest {
         String lastName = "Baggins";
         String description = null;
         int jobYears = 2;
+        String email = "frodobaggins@shire.com";
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee(firstName, lastName, description, jobYears));
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
 
     @Test
@@ -61,8 +66,9 @@ class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = -2;
+        String email = "frodobaggins@shire.com";
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee(firstName, lastName, description, jobYears));
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
 
     @Test
@@ -72,8 +78,9 @@ class EmployeeTest {
         String lastName = "Baggins";
         String description = "ring bearer";
         int jobYears = 2;
+        String email = "frodobaggins@shire.com";
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee(firstName, lastName, description, jobYears));
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
 
     @Test
@@ -83,8 +90,9 @@ class EmployeeTest {
         String lastName = "";
         String description = "ring bearer";
         int jobYears = 2;
+        String email = "frodobaggins@shire.com";
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee(firstName, lastName, description, jobYears));
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
 
     @Test
@@ -94,8 +102,33 @@ class EmployeeTest {
         String lastName = "Baggins";
         String description = "";
         int jobYears = 2;
+        String email = "frodobaggins@shire.com";
         //Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> new Employee(firstName, lastName, description, jobYears));
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
+    }
+
+    @Test
+    void createEmployee_ThrowsExceptionEmptyEmail() {
+        //Arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 2;
+        String email = "";
+        //Act & Assert
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
+    }
+
+    @Test
+    void createEmployee_ThrowsExceptionNullEmail() {
+        //Arrange
+        String firstName = "Frodo";
+        String lastName = "Baggins";
+        String description = "ring bearer";
+        int jobYears = 2;
+        String email = null;
+        //Act & Assert
+        assertThrows(InstantiationException.class, () -> new Employee(firstName, lastName, description, jobYears,email));
     }
   
 }

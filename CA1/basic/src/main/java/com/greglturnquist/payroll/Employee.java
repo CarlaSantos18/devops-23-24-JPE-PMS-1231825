@@ -33,17 +33,19 @@ public class Employee {
 	private String lastName;
 	private String description;
 	private int jobYears;
+	private String email;
 
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description, int jobYears) {
-		if(firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || description == null || description.isEmpty() || jobYears < 0){
-			throw new IllegalArgumentException("Invalid parameters");
+	public Employee(String firstName, String lastName, String description, int jobYears, String email) throws InstantiationException {
+		if(firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || description == null || description.isEmpty() || jobYears < 0 || email == null || email.isEmpty()){
+			throw new InstantiationException("Invalid parameters");
 		}
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
 		this.jobYears = jobYears;
+		this.email = email;
 	}
 
 	@Override
@@ -54,13 +56,15 @@ public class Employee {
 		return Objects.equals(id, employee.id) &&
 			Objects.equals(firstName, employee.firstName) &&
 			Objects.equals(lastName, employee.lastName) &&
-			Objects.equals(description, employee.description);
+			Objects.equals(description, employee.description) &&
+			Objects.equals(jobYears, employee.jobYears) &&
+			Objects.equals(email, employee.email);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, description);
+		return Objects.hash(id, firstName, lastName, description, jobYears, email);
 	}
 
 	public Long getId() {
@@ -103,6 +107,14 @@ public class Employee {
 		this.jobYears = jobYears;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee{" +
@@ -110,7 +122,8 @@ public class Employee {
 			", firstName='" + firstName + '\'' +
 			", lastName='" + lastName + '\'' +
 			", description='" + description + '\'' +
-			", jobYears=" + jobYears +
+			", jobYears=" + jobYears + '\'' +
+			", email=" + email +
 			'}';
 	}
 }
