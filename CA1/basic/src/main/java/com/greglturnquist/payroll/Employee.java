@@ -38,7 +38,7 @@ public class Employee {
 	private Employee() {}
 
 	public Employee(String firstName, String lastName, String description, int jobYears, String email) throws InstantiationException {
-		if(firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || description == null || description.isEmpty() || jobYears < 0 || email == null || email.isEmpty()){
+		if(firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || description == null || description.isEmpty() || jobYears < 0 || email == null || !email.contains("@")){
 			throw new InstantiationException("Invalid parameters");
 		}
 		this.firstName = firstName;
