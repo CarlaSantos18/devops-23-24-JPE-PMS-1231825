@@ -827,12 +827,13 @@ after making changes to the code, committing them and merging into the master br
 was developed in the master branch, which is not the best practice. 
 
 For the second branch I didn't have this problem because I ran the command to push the new branch to the repository
-right after creating it.
+right after creating it and before making any changes to the code.
 
 However, since I didn't create issues while developing the new features, I had to go back and create them after the
 changes were made. This was a problem because I was supposed to create issues before making changes to the code, so I
 could link the issues to the commits that fixed them. To fix this, I followed professor Paulo's advice and created the
-issues, changed the commit messages to link the issues, and pushed the changes to the remote repository.
+issues, changed the commit messages to link the issues, and pushed the changes to the remote repository. I am aware that
+this is not the best practice, but since this is a private repository, I was able to do it without causing any problems.
 
 To change the commit messages, I used the following command:
 
