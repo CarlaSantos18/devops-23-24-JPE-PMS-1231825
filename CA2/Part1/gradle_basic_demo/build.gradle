@@ -75,3 +75,12 @@ task makeCopy(type: Copy){
     from 'src'
     into 'backup'
 }
+
+task makeZip(type: Zip){
+    group = "DevOps"
+    description = "Creates a zip archive of the 'src' folder"
+
+    archiveFileName = 'src.zip'
+    destinationDirectory = file('zipFolder')
+    from 'src'
+}
