@@ -67,3 +67,11 @@ task runClient(type:JavaExec, dependsOn: classes){
 
     args 'localhost', '59001'
 }
+
+task makeCopy(type: Copy){
+    group = "DevOps"
+    description = "Creates a copy of the 'src' folder in a 'backup' folder"
+
+    from 'src'
+    into 'backup'
+}
