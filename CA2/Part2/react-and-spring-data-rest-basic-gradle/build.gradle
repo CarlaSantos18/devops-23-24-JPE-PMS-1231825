@@ -43,3 +43,12 @@ task makeJarCopy(type: Copy){
 	into 'dist'
 	include '*.jar'
 }
+
+task deleteWebpackFiles(type: Delete){
+	group = "DevOps"
+	description = "Deletes all files in the 'src/resources/main/static/built/' folder."
+
+	delete fileTree('src/main/resources/static/built/')
+}
+
+clean.dependsOn(deleteWebpackFiles)
