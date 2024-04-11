@@ -34,3 +34,12 @@ frontend {
 	cleanScript = "run clean"
 	checkScript = "run check"
 }
+
+task makeJarCopy(type: Copy){
+	group = "DevOps"
+	description = "Creates a copy of the generated .jar file in a 'dist' folder located at the project root folder level."
+
+	from 'build/libs/'
+	into 'dist'
+	include '*.jar'
+}
