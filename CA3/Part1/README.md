@@ -49,46 +49,17 @@ $ sudo ./gradlew build
 To run the chat server on the VM, I ran the command:
 
 ```bash
-$ java -cp build/libs/basic_demo-0.1.0.jar basic_demo.ChatServerApp 59001
+$ sudo ./gradlew runServer
 ```
 
-To run the chat client on my host machine, I had to change the args from my **runClient** task inside the **build.gradle**
-file on the cloned project, from:
+To run the chat client on the computer terminal of my host machine, I ran the following command:
 
-```groovy
-task runClient(type:JavaExec, dependsOn: classes){
-    group = "DevOps"
-    description = "Launches a chat client that connects to a server on localhost:59001 "
-  
-    classpath = sourceSets.main.runtimeClasspath
-
-    main = 'basic_demo.ChatClientApp'
-
-    args 'localhost', '59001'
-}
-```
-
-To:
-
-```groovy
-task runClient(type:JavaExec, dependsOn: classes){
-    group = "DevOps"
-    description = "Launches a chat client that connects to a server on localhost:59001 "
-  
-    classpath = sourceSets.main.runtimeClasspath
-
-    main = 'basic_demo.ChatClientApp'
-
-    args '192.168.254.5', '59001'
-}
+```bash
+$ ./gradlew runClient --args="192.168.254.5 59001"
 ```
 
 This way, when I run the **runClient** task on my host machine, it will connect the chat client to the chat server 
-running on the VM. The command used was:
-
-```bash
-$ ./gradlew runClient
-```
+running on the VM.
 
 These steps are required so we can test a real situation where a client connects with an external server.
 
