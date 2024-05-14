@@ -14,11 +14,19 @@ class App extends React.Component { // <1>
 		this.state = {employees: []};
 	}
 
+	// For the CA2-Part2 assignment, we use the following method:
 	componentDidMount() { // <2>
-		client({method: 'GET', path: '/react-and-spring-data-rest-basic-0.0.1-SNAPSHOT/api/employees'}).done(response => {
+		client({method: 'GET', path: '/api/employees'}).done(response => {
 			this.setState({employees: response.entity._embedded.employees});
 		});
 	}
+
+	// For the CA3-Part2 assignment, we use the following method:
+	// componentDidMount() { // <2>
+	// 	client({method: 'GET', path: '/react-and-spring-data-rest-basic-0.0.1-SNAPSHOT/api/employees'}).done(response => {
+	// 		this.setState({employees: response.entity._embedded.employees});
+	// 	});
+	// }
 
 	render() { // <3>
 		return (
