@@ -7,6 +7,7 @@ pipeline {
                 echo 'Checking out...'
                 git 'https://github.com/CarlaSantos18/devops-23-24-JPE-PMS-1231825.git'
             }
+        }
         stage('Assemble') {
                     steps {
                         echo 'Assembling...'
@@ -15,7 +16,7 @@ pipeline {
                             sh './gradlew clean assemble'
                         }
                     }
-                }
+        }
         stage('Test') {
             steps {
                 echo 'Testing...'
