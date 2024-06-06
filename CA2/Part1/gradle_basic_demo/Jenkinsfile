@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out...'
-                git 'https://github.com/CarlaSantos18/devops-23-24-JPE-PMS-1231825.git'
+                git branch: 'main', url: 'https://github.com/CarlaSantos18/devops-23-24-JPE-PMS-1231825.git'
             }
         }
         stage('Assemble') {
