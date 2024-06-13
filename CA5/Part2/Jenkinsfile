@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CarlaSantos18/devops-23-24-JPE-PMS-1231825.git'
+            }
+        }
+
+        stage('Assemble') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic-gradle') {
+                    bat './gradlew assemble'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic-gradle') {
+                    bat './gradlew test'
+                }
+            }
+            post {
+                always {
+                    junit '**/build/test-results/**/*.xml'
+                }
+            }
+        }
+
+        stage('Javadoc') {
+            steps {
+                dir('CA2/Part2/react-and-spring-data-rest-basic-gradle') {
+                    bat './gradlew javadoc'
+                }
+            }
+            post {
+                always {
+                    publishHTML(target: [
+                            allowMissing         : false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll              : true,
+                            reportDir            : 'CA2/Part2/react-and-spring-data-rest-basic-gradle/build/docs/javadoc',
+                            reportFiles          : 'index.html',
+                            reportName           : 'Javadoc'
+                    ])
+                }
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: '**/build/libs/*.war', fingerprint: true
+            }
+        }
+
+        stage('Publish Image') {
+            steps {
+                script {
+                    dir('CA5/Part2') {
+                        bat 'copy ..\\..\\CA2\\Part2\\react-and-spring-data-rest-basic-gradle\\build\\libs\\*.war .'
+                        def app = docker.build("carlasantos1231825:${env.BUILD_NUMBER}")
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
+                            app.push()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
